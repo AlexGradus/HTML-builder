@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const path = require('path');
-let b=path.join(__dirname)+'/secret-folder';
+let b=path.join(__dirname,'secret-folder');
 
 
 fs.readdir(b, {withFileTypes: true},(err, files)=>{

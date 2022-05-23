@@ -3,8 +3,8 @@ const path = require('path');
 let b=path.join(__dirname)+'/files';
 let c=path.join(__dirname)+'/files-copy';
 
-async function del(){
-   await fs.readdir(c,(err, files)=>{
+ function del(){
+    fs.readdir(c,(err, files)=>{
         for(let i=0;i<files.length;i++){
             fs.rm(c+ `/${files[i]}`,err => {if(err) throw err; } );
             }});
@@ -12,7 +12,7 @@ async function del(){
    
 }
 
-async function myF(){
+ function myF(){
      fs.stat(c, function(err) {
         if (!err) {
             
