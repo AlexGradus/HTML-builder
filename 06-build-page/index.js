@@ -9,7 +9,7 @@ let f=path.join(__dirname)+'/styles';
 let r=path.join(__dirname)+'/project-dist/style.css';
 let inside=path.join(__dirname,'project-dist','assets');
 let s=path.join(__dirname,'assets');
-CreateDir();
+
 
 async function CreateDir(){
   
@@ -18,6 +18,10 @@ async function CreateDir(){
   await rm(d, { force: true, recursive: true});
   
   
+  
+}
+
+async function SolveDir(){
   await mkdir(d, {recursive: true});
   await  CDR(s, inside);
   async function CDR(a, b) {
@@ -103,12 +107,19 @@ async function OpenText(){
  
 }
 
+const Conclusion=async()=>{
+  await CreateDir();
+  await SolveDir();
+  await OpenText();
+};
+
+Conclusion();
 
 
 
 
 
-OpenText();
+
 
 
 
