@@ -108,10 +108,10 @@ async function OpenText(){
 }
 
 const Conclusion=async()=>{
-  await CreateDir();
-  await SolveDir();
-  await OpenText();
-};
+   await CreateDir();
+   await SolveDir();
+   await OpenText();
+}
 
 Conclusion();
 

@@ -1,60 +1,40 @@
 const fs=require('fs');
 const path = require('path');
+const {rm} = require('fs/promises');
 let b=path.join(__dirname)+'/files';
 let c=path.join(__dirname)+'/files-copy';
 
- function del(){
-    fs.readdir(c,(err, files)=>{
-        for(let i=0;i<files.length;i++){
-            fs.rm(c+ `/${files[i]}`,err => {if(err) throw err; } );
-            }});
+async function del(){
+  await  rm(c, { force: true, recursive: true});
 
    
 }
 
- function myF(){
-     fs.stat(c, function(err) {
-        if (!err) {
-            
-            del();
-            fs.mkdir(c,{recursive:true} ,err => {
-                if(err) throw err; 
-                console.log('Папка к вашим услугам!');
-                fs.readdir(b,(err, files)=>{
-                    for(let i=0;i<files.length;i++){
-                        fs.copyFile(b+`/${files[i]}`,c+`/${files[i]}`, err =>{
-                            if(err) throw err; 
-                            
-                        });
-                    }
-                
-                })
-               
-            });
-            
-           
-        }
-        else if (err.code === 'ENOENT') {
-            
-            fs.mkdir(c,{recursive:true} ,err => {
-                if(err) throw err; 
-                console.log('Папка к вашим услугам!');
-                fs.readdir(b,(err, files)=>{
-                    for(let i=0;i<files.length;i++){
-                        fs.copyFile(b+`/${files[i]}`,c+`/${files[i]}`, err =>{
-                            if(err) throw err; 
-                            
-                        });
-                    }
-                
-                })
-               
-            });
-            
-        }
+async function myF(){
+  fs.mkdir(c,{recursive:true} ,err => {
+    if(err) throw err; 
+    console.log('Папка к вашим услугам!');
+    fs.readdir(b,(err, files)=>{
+      for(let i=0;i<files.length;i++){
+        fs.copyFile(b+`/${files[i]}`,c+`/${files[i]}`, err =>{
+          if(err) throw err; 
+                    
+        });
+      }
+        
     });
+       
+  });
 }
-myF();
+
+
+
+const Conclusion=async()=>{
+  await del();
+  await  myF();
+};
+ 
+Conclusion();
 
 
 
